@@ -1,0 +1,30 @@
+package com.lizhihai.miaosha.config.web;
+
+import com.lizhihai.miaosha.config.web.resolver.UserArgumentResolver;
+import com.lizhihai.miaosha.validator.accesslimit.AccessLimitInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
+
+@Configuration
+public class WebMvcConfiguration implements WebMvcConfigurer {
+
+    @Autowired
+    UserArgumentResolver userArgumentResolver;
+    @Autowired
+    AccessLimitInterceptor accessLimitInterceptor;
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(userArgumentResolver);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(accessLimitInterceptor);
+    }
+}

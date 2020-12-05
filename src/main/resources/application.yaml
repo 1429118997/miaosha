@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: test
+#####静态资源
+  resources:
+    add-mappings: true
+    cache:
+      cachecontrol:
+        max-age: 3600
+        cache-public: true
+    chain:
+      enabled: true
+      cache: true
+      compressed: true
+      html-application-cache: true
+    static-locations: classpath:/static/
+###rabbitmq
+server:
+  tomcat:
+    max-connections: 10000
+    accept-count: 200
+
+
+
+
+###Tomcat
